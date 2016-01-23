@@ -2,11 +2,13 @@
   "name": "seneca-test",
   "version": "0.1.0",
   "description": "Testing playground for Seneca Microservices",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Brian <bmancini@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "seneca": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel": "^6.3.26"
   }
 }
