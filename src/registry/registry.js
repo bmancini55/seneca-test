@@ -9,40 +9,62 @@
  * the entire peer list?
  */
 
+let mongo = require('mongo-helper');
+
 // export the factory function
 // and each function that we want to test
 module.exports = {
-  create() {
-    return function(options) {
-      let seneca = this;
-      seneca.add('role:registry,cmd:register', (args, cb) => register(args, cb).catch(cb));
-      seneca.add('role:registry,cmd:unregister', (args, cb) => unregister(args, cb).catch(cb));
-      seneca.add('role:registry,cmd:list', (args, cb) => list(args, cb).catch(cb))
-    }
-  },
+  plugin,
   register,
   unregister,
   list
 };
 
-async function register({ type, host, port }, cb) {
-  // TODO promisify save$
-  let entity = cb.seneca.make$('microservice')
-  entity.type = type;
-  entity.host = host;
-  entity.port = port;
-  entity.updated = new Date().toISOString();
-  entity.save$(cb);
+// Factory function that converts promisifed functions into
+// mounted callback functions via the standard add method.
+// Idally seneca.add could be extended to perform this functionality
+// automatically.
+function plugin() {
+  let seneca = this;
+  seneca.add('role:registry,cmd:register', (args, cb) => register(args).then((res) => cb(null, res)).catch(cb));
+  seneca.add('role:registry,cmd:unregister', (args, cb) => unregister(args).then((res) => cb(null, res)).catch(cb));
+  seneca.add('role:registry,cmd:list', (args, cb) => list(args).then((res) => cb(null, res)).catch(cb))
 }
 
-async function unregister({ type, host, port }, cb) {
-  // TODO promisify remove$
-  let entity = cb.seneca.make$('microservice');
-  entity.remove$({ type, host, port }, cb);
+async function register({ type, host, port }) {
+  let collection = mongo.collection('microservice');
+  let filter = {
+    type: type,
+    host: host,
+    port: port
+  };
+  let update = {
+    $set: {
+      type: type,
+      host: host,
+      port: port,
+      updated: new Date().toISOString()
+    },
+    $setOnInsert: {
+      created: new Date().toISOString()
+    }
+  };
+  let options = {
+    upsert: true,
+    returnOriginal: false
+  };
+  let result = await collection.findOneAndUpdate(filter, update, options);
+  return result.value;
 }
 
-async function list({ }, cb) {
-  // TODO promisify list$
-  let entity = cb.seneca.make$('microservice');
-  entity.list$({ }, cb);
+async function unregister({ type, host, port }) {
+  let collection = mongo.collection('microservice');
+  await collection.remove({ type, host, post });
+}
+
+async function list() {
+  let collection = mongo.collection('microservice');
+  return await collection
+    .find({})
+    .toArrayAsync();
 }

@@ -1,12 +1,14 @@
 let seneca = require('seneca')();
+let mongo = require('mongo-helper');
+let comicmetadata = require('./comics-metadata')
+
+mongo
+  .connect({ url: 'mongodb://dev.southsidecomicspgh.com/southsidecomics' })
+  .then(() => console.log('Connected to mongodb'))
+  .catch(console.log);
 
 seneca
-  .use('mongo-store', {
-    name:'southsidecomics',
-    host:'dev.southsidecomicspgh.com',
-    port:27017
-  })
-  .use(require('./comics-metadata').create())
+  .use(comicmetadata.plugin)
   .client({
     type: 'http',
     pin: 'role:registry'

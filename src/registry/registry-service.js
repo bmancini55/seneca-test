@@ -1,12 +1,14 @@
 let seneca = require('seneca')();
+let mongo = require('mongo-helper');
+let registry = require('./registry');
+
+mongo
+  .connect({ url: 'mongodb://dev.southsidecomicspgh.com/seneca-test' })
+  .then(() => console.log('Connected to mongodb'))
+  .catch(console.log);
 
 seneca
-  .use('mongo-store',{
-    name:'seneca-test',
-    host:'dev.southsidecomicspgh.com',
-    port:27017
-  })
-  .use(require('./registry').create())
+  .use(registry.plugin)
   .listen({
     type: 'http',
     pin: 'role:registry'
