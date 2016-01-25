@@ -9,21 +9,17 @@ mongo
 
 seneca
   .use(comicmetadata.plugin)
-  .client({
-    type: 'http',
-    pin: 'role:registry'
+  .use('mesh', {
+    auto: true,
+    pin: 'role:comics-metadata'
   })
   .ready(() => {
     register({
       seneca: seneca,
       type: 'comics-metadata',
-      host: 'HOST',
-      port: 10102
+      host: 'HOST', // need to retrieve this
+      port: 10102   // need to retrieve this
     });
-  })
-  .listen({
-    pin: 'comics-metadata',
-    port: 10102
   });
 
 function register({ seneca, type, host, port }) {

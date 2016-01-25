@@ -1,7 +1,8 @@
 {
-  "name": "seneca-test-comics-metadata",
+  "name": "seneca-test-meshbase",
   "version": "0.1.0",
-  "description": "Microservice for finding comics metadata",
+  "description": "Base entry point for mesh networking",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
@@ -9,14 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.35",
-    "mongo-helper": "file:../mongo-helper",
     "seneca": "^1.0.0",
     "seneca-balance-client": "^0.2.0",
     "seneca-mesh": "^0.3.0"
-  },
-  "devDependencies": {
-    "chai": "^3.4.1",
-    "mocha": "^2.3.4",
-    "sinon": "^1.17.2"
   }
 }

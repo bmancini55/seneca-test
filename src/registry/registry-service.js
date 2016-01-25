@@ -9,7 +9,7 @@ mongo
 
 seneca
   .use(registry.plugin)
-  .listen({
-    type: 'http',
+  .use('mesh', {
+    auto: true,
     pin: 'role:registry'
   });

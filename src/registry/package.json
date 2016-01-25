@@ -10,7 +10,9 @@
   "dependencies": {
     "babel": "^5.8.35",
     "mongo-helper": "file:../mongo-helper",
-    "seneca": "^1.0.0"
+    "seneca": "^1.0.0",
+    "seneca-balance-client": "^0.2.0",
+    "seneca-mesh": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^3.4.1",
