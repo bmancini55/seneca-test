@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Microservice for finding comics metadata",
   "scripts": {
-    "start": "node index.js"
+    "start": "babel-node comics-metadata-service.js"
   },
   "author": "Brian <bmancini@gmail.com>",
   "license": "MIT",

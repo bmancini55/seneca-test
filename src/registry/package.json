@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Registry microservice using seneca",
   "scripts": {
-    "start": "node index.js"
+    "start": "babel-node registry-service.js"
   },
   "author": "Brian <bmancini@gmail.com>",
   "license": "MIT",
