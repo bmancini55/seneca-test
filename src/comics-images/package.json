@@ -1,0 +1,18 @@
+{
+  "name": "seneca-test-comics-images",
+  "version": "0.1.0",
+  "description": "Image microservice",
+  "scripts": {
+    "start": "babel-node comics-images-services.js"
+  },
+  "author": "Brian <bmancini@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^5.8.35",
+    "bluebird": "^3.1.5",
+    "request": "^2.67.0",
+    "seneca": "^1.0.0",
+    "seneca-balance-client": "^0.2.0",
+    "seneca-mesh": "^0.3.0"
+  }
+}
