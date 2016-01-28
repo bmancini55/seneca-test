@@ -11,5 +11,7 @@ seneca
   .use(registry.plugin)
   .use('mesh', {
     auto: true,
+    basehost: '172.17.0.2',
+    host: '172.17.0.3',
     pin: 'role:registry'
   });

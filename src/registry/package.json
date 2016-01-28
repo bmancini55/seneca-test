@@ -12,7 +12,7 @@
     "mongo-helper": "bmancini55/mongo-helper",
     "seneca": "^1.0.0",
     "seneca-balance-client": "^0.2.0",
-    "seneca-mesh": "^0.3.0"
+    "seneca-mesh": "bmancini55/seneca-mesh"
   },
   "devDependencies": {
     "chai": "^3.4.1",

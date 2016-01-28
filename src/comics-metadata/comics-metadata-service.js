@@ -11,14 +11,16 @@ seneca
   .use(comicmetadata.plugin)
   .use('mesh', {
     auto: true,
+    basehost: '172.17.0.2',
+    host: '172.17.0.4',
     pin: 'role:comics-metadata'
   })
   .ready(() => {
     register({
       seneca: seneca,
       type: 'comics-metadata',
-      host: 'HOST', // need to retrieve this
-      port: 10102   // need to retrieve this
+      host: '172.17.0.4', // need to retrieve this
+      port: 10102         // need to retrieve this
     });
   });
 
